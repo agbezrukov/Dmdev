@@ -1,28 +1,54 @@
-package com.kova.lesson5;
+package com.kova.lesson7;
+
+import java.util.Arrays;
 
 /**
- * Дано целое число.
- * Написать функцию, которая принимает целое число, а возвращает целое число обратное этому (не строку!).
- * Результат вывести на консоль.
- * Например: 4508 -> 8054, 4700 -> 74, 1234567 -> 7654321
+ * Задание 2
+ * Дан одномерный массив символов.
+ * Преобразовать его в одномерный массив чисел, где число
+ * - это код символа (любой символ - это число в памяти компьютера).
+ * Например: [‘a’, ‘6’, ‘y’, ‘P’, ‘T’, ‘q’, ‘9’, ‘+’] -> [97, 54, 121, 80, 84, 113, 57, 43]
  *
- * Примечание: для решения может понадобится функция возведение числа в степень: Math.pow(число, степень)
+ * Далее определить среднее арифметическое всех элементов целочисленного массива
+ * и вывести на консоль только те элементы, которые больше этого среднего арифметического.
  */
 public class HomeWork2 {
     public static void main(String[] args) {
+    char [] values = {'a', '6', 'y', 'P', 'T', 'q', '9', '+'};
 
-        int a = 1234567;
+    int [] numbers = conversionToInteger(values);
 
-        System.out.println(invertedNumber(a));
+        System.out.println(Arrays.toString(numbers));
+
+        moreAverageNumbers(numbers);
+
     }
 
-    public static int invertedNumber(int value){
-        int sum = 0;
-        for (int i = value; i > 0 ; i /= 10) {
-         sum *= 10;
-         sum += i % 10;
+    private static void moreAverageNumbers (int [] values){
+
+        for (int i = 0; i < values.length; i++) {
+            if (values[i] > averageNumbers(values)){
+                System.out.print(values[i] + " ");
+            }
         }
-        return sum;
     }
 
+    private static int [] conversionToInteger(char [] values){
+
+        int [] value = new int[values.length];
+
+        for (int i = 0; i < values.length; i++) {
+            value[i] = (int)values[i];
+        }
+        return value;
+    }
+
+    private static int averageNumbers(int [] values){
+        int sumNumbers = 0;
+
+        for (int i = 0; i < values.length; i++) {
+            sumNumbers += values[i];
+        }
+        return sumNumbers /= values.length;
+    }
 }
