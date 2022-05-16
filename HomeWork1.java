@@ -1,38 +1,51 @@
-package com.kova.lesson5;
+package com.kova.lesson7;
+
+import java.util.Arrays;
 
 /**
  * Задание 1
- * Посчитать четные и нечетные цифры целого числа и вывести их на консоль.
- * Для решения написать 2 функции, которые будут принимать введенное целое число,
- * а возвращать количество четных цифр (вторая функция - нечетных).
- * Например: если введено число 228910, то у него 4 четные цифры (2, 2, 8, 0) и 2 нечетные (9, 1).
+ * Дан одномерный массив целых чисел.
+ * Написать функцию, удаляющую из него все отрицательные элементы
+ * (удалить - значит создать новый массив с только положительными элементами).
+ * После удаления - умножить каждый элемент массива на его длину.
+ * Например: [3, 5, -6, 3, 2, -9, 0, -123] -> [15, 25, 15, 10, 0]
+ *
+ * Не забывать, что всю логику приложения нужно выносить в отдельные функции.
+ * main - только для тестирования написанного функционала.
  */
 public class HomeWork1 {
     public static void main(String[] args) {
-        int count = 228910;
-        System.out.println("В числе " + count + " четных цифр " +  amountEven(count) + " и " +
-                "не четных цифр " +  amountOdd(count));
+       int [] values = {3, 5, -6, 3, 2, -9, 0, -123};
+
+       int [] valuePositive = deleteNegativeNumbers(values);
+
+        System.out.println(Arrays.toString(valuePositive));
+
     }
 
-    public static int amountEven(int value) {
+    private static int [] deleteNegativeNumbers(int [] values){
+
+        int [] positiveValues = new int[amountPositiveNumbers(values)];
+
         int count = 0;
-        for (int i = value; 0 < i; i /= 10) {
-            int balance = i % 10;
-            if (balance % 2 == 0) {
-                count++;
+
+        for (int i = 0; i < values.length; i++) {
+                if (values[i] >= 0){
+                    values[i] *= amountPositiveNumbers(values);
+                    positiveValues[count] = values[i];
+                    count++;
             }
         }
-        return count;
+        return positiveValues;
     }
 
-    public static int amountOdd(int value) {
-        int count = 0;
-        for (int i = value; 0 < i; i /= 10) {
-            int balance = i % 10;
-            if (balance % 2 != 0) {
-                count++;
+    private static int amountPositiveNumbers(int [] values){
+        int sumIndex = 0;
+        for (int i = 0; i < values.length; i++) {
+            if (values[i] >= 0){
+                sumIndex++;
             }
         }
-        return count;
+        return sumIndex;
     }
 }
