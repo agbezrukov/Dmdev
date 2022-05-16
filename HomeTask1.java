@@ -1,29 +1,39 @@
-package com.kova.lesson5;
+package com.kova.lesson7;
+
+import java.util.Arrays;
+import java.util.Locale;
 
 /**
- * В переменной minutes лежит число от 0 до 59.
- * Написать функцию, которая принимает в качестве параметра значение переменной minutes и выводит на консоль
- * в какую четверть часа попадает это число (в первую, вторую, третью или четвертую).
+ * Задание 1
+ * Дана строка.
+ * Удалить из нее все повторяющиеся символы без учета регистра, если они идут друг за другом.
+ * Также удалить пробелы.
+ * Результат привести к верхнему регистру.
  *
- * Протестировать функцию в main.
+ * Например:
+ * "abc Cpddd Dio OsfWw" -> "ABCPDIOSFW"
  */
 public class HomeTask1 {
     public static void main(String[] args) {
-        int minutes = 11;
-        quarterHour(minutes);
+        String value = "abc Cpddd Dio OsfWw";
+        String result = deleteCharacter(value);
+        System.out.println(result);
     }
 
-    public static void quarterHour(int minutes){
-        if (minutes >= 0 && minutes <= 14){
-            System.out.println("первая четверть часа");
-        }else if (minutes >= 15 && minutes <= 29){
-            System.out.println("вторая четверть часа");
-        }else if (minutes >= 30 && minutes <= 44) {
-            System.out.println("третья четверть часа");
-        }else if (minutes >= 45 && minutes <= 59) {
-            System.out.println("четвертая четверть часа");
-        }else {
-            System.out.println("не верно указаны минуты");
+    private static String deleteCharacter(String str){
+
+        StringBuilder sb = new StringBuilder(replace(str).toUpperCase(Locale.ROOT));
+        for (int i = 1; i < sb.length(); i++) {
+            String ch = String.valueOf(sb.charAt(i - 1));
+            while (sb.indexOf(ch, i) != -1) {
+                sb.deleteCharAt(sb.indexOf(ch, i));
+            }
         }
+        return sb.toString();
     }
+
+    private static String replace(String value){
+        return value.replace(" ","");
+    }
+
 }
