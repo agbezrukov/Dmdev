@@ -1,0 +1,30 @@
+package com.kova;
+
+/**
+ * двух полей: название и количество пользователей
+ */
+public class Chat {
+    private String nameChat;
+    private int numberUser;
+
+    public Chat(String nameChat, int numberUser) {
+        this.nameChat = nameChat;
+        this.numberUser = numberUser;
+    }
+
+    public String getNameChat() {
+        return nameChat;
+    }
+
+    public int getNumberUser() {
+        return numberUser;
+    }
+
+    @Override
+    public String toString() {
+        return "Chat{" +
+                "nameChat='" + nameChat + '\'' +
+                ", numberUser=" + numberUser +
+                '}';
+    }
+}
